@@ -1,6 +1,6 @@
 import {takeEvery,put,call} from 'redux-saga/effects';
-import {REQUEST_POSTS_START} from "./actions/taskAction";
-import allActions from "./actions";
+import {REQUEST_POSTS_START} from "../actions/taskAction";
+import allActions from "../actions";
 
 export function* sagaWatcher() {
   yield takeEvery(REQUEST_POSTS_START,sagaWorker)

@@ -41,7 +41,7 @@ const Tasks = () => {
           {tasks.tasks.length < 1 ? <p className="mb-0 h3 text-muted text-center">Тут пока ничего нет</p> : (
             <ul className="list-group mb-5 pb-5">
               {tasks.tasks.map((item,idx) => (
-                <TaskItem {...item} key={item.title} id={idx}/>
+                <TaskItem {...item} key={item.title + idx} id={idx}/>
               ))}
             </ul>
           )}

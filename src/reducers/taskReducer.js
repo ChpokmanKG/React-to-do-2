@@ -1,16 +1,17 @@
 import {
   ADD_TASK,
-  CHANGE_TITLE,
-  CHANGE_SUCCESS_STATUS,
+  CHANGE_TASK_INFO,
+  TOGGLE_COMPLETE,
   DELETE_TASK,
   REQUEST_POSTS_SUCCESS,
   REQUEST_POSTS_FAILED,
-  REQUEST_POST_STATUS_CHANGE
+  REQUEST_STATUS_CHANGE
 } from "../actions/taskAction";
 
 const initialState = {
   tasks: [{
     title: 'Нажми на текст два раза',
+    leftDate: '',
     completed: false
   }],
   dataLoaded: 'no yet' // no yet | fail
@@ -19,21 +20,24 @@ const initialState = {
 const taskReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_TASK:
+
       return {
         ...state,
         tasks: [...state.tasks, {
-          title: action.payload,
+          title: action.payload.title,
+            leftDate: action.payload.date,
           completed: false,
         }],
       }
 
-    case CHANGE_TITLE:
-      state.tasks[action.taskId].title = action.payload;
+    case CHANGE_TASK_INFO:
+      state.tasks[action.taskId].title = action.payload.title;
+      state.tasks[action.taskId].leftDate = action.payload.leftDate;
       return {
         ...state
       }
 
-    case CHANGE_SUCCESS_STATUS:
+    case TOGGLE_COMPLETE:
       state.tasks[action.taskId].completed = !state.tasks[action.taskId].completed;
       return {
         ...state
@@ -46,9 +50,11 @@ const taskReducer = (state = initialState, action) => {
       }
 
     case REQUEST_POSTS_SUCCESS:
+      const _remove = state.tasks.map(item => item.id);
+      const filtered = action.payload.filter(item => !_remove.includes(item.id));
       return {
         ...state,
-        tasks: [...state.tasks,...action.payload]
+        tasks: [...state.tasks,...filtered]
       }
 
     case REQUEST_POSTS_FAILED:
@@ -57,7 +63,7 @@ const taskReducer = (state = initialState, action) => {
         dataLoaded: 'fail'
       }
 
-    case REQUEST_POST_STATUS_CHANGE:
+    case REQUEST_STATUS_CHANGE:
       return {
         ...state,
         dataLoaded: 'no yet'

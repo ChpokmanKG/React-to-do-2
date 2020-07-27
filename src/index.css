@@ -1,0 +1,87 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.modal-wrapper {
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 10;
+}
+
+.modal-wrapper__inner {
+  transition: .5s ease-in-out all;
+}
+
+.ad {
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+
+.ad__progress-bar {
+  animation: progressbar-countdown;
+  animation-duration: 40s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: paused;
+  animation-timing-function: linear;
+}
+
+@keyframes progressbar-countdown {
+  0% {
+    width: 100%;
+  }
+  100% {
+    width: 0%;
+  }
+}
+
+
+.add-task-wrap {
+  z-index: 1 !important;
+}
+
+
+.modal-enter {
+  opacity: 0.01;
+}
+
+.modal-enter.modal-enter-active {
+  opacity: 1;
+  transition: opacity .1s ease-in;
+}
+
+.modal-leave {
+  opacity: 1;
+}
+
+.modal-leave.modal-leave-active {
+  opacity: 0.01;
+  transition: opacity .2s ease-in;
+}
+
+.flex-column-landscape {
+  flex-direction: column;
+}
+
+.col-landscape {
+  width: 100%;
+}
+
+@media (max-width: 992px) and (orientation: landscape) {
+  .col-landscape {
+    width: 50% !important;
+  }
+  .flex-column-landscape {
+    flex-direction: initial;
+  }
+  .ad__img {
+    height: 65% !important;
+  }
+}
